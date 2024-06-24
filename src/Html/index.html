@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../images/favicon-32x32.png"
+    />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Frontend Mentor | Interactive comments section</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Add Comment -->
+      <div class="addCommentWrapper">
+        <div class="commentNormalWrapper hidden">
+          <img
+            class="userIcon"
+            src="../../images/avatars/image-juliusomo.png"
+            alt=""
+          />
+          <input
+            class="comment--input"
+            type="text"
+            placeholder="Add a comment..."
+          />
+          <button class="button-primary comment--button">SEND</button>
+        </div>
+
+        <div class="comment-input-button-responsive">
+          <input
+            class="comment--input"
+            type="text"
+            placeholder="Add a comment..."
+          />
+          <div class="comment-details-responsive">
+            <img
+              class="userIcon"
+              src="../../images/avatars/image-juliusomo.png"
+              alt=""
+            />
+            <button class="button-primary comment--button">SEND</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reply Container -->
+    </div>
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/Template2.js"></script>
+    <script type="module" src="../js/TimeHandler.js"></script>
+  </body>
+</html>
