@@ -1,10 +1,11 @@
 import {
+  comments,
   updateUI,
   findCommentById,
   findCurrentId,
+  user,
   currentUser,
 } from "../js/main.js";
-import { comments, user } from "./user.js";
 import { Template, replyInputContainer } from "../js/Template2.js";
 import {
   deleteComment,
@@ -95,12 +96,12 @@ export function replyComment() {
           };
           tempAccount.replies.push(props);
           updateUI(comments);
-          deleteComment();
           replyComment();
+          deleteComment();
           addVoteEventListeners();
         });
       });
-
+      
       //If a click is executed other than the content, it collapses
       body.addEventListener(
         "click",
