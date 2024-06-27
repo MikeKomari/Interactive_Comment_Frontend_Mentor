@@ -1,11 +1,20 @@
 export class Template {
-  constructor({ id, content, createdAt, score, image, username }) {
+  constructor({
+    id,
+    content,
+    createdAt,
+    score,
+    image,
+    username,
+    replyingTo = null,
+  }) {
     this.id = id;
     this.createdAt = createdAt;
     this.score = score;
     this.image = image;
     this.username = username;
     this.content = content;
+    this.replyingTo = replyingTo;
   }
 
   fromUser() {
@@ -13,11 +22,11 @@ export class Template {
     <div class="commentContent">
       <!-- Counter -->
       <div class="counterWrapper">
-        <button class="counterButton counter--increment">
+        <button data-id="${this.id}" class="counterButton counter--increment">
           <h2 class="incrementText">+</h2>
         </button>
         <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
-        <button class="counterButton counter--decrement">
+        <button data-id="${this.id}" class="counterButton counter--decrement">
           <h2 class="incrementText">-</h2>
         </button>
       </div>
@@ -35,11 +44,11 @@ export class Template {
             <p class="text--neutral">${this.createdAt}</p>
           </div>
           <div class="comment--features">
-        <div class="comment--delete">
+        <div class="comment--delete" data-id="${this.id}">
           <img src="../../images/icon-delete.svg" alt="" />
-          <p class="text--primary text--delete">Delete</p>
+          <p class="text--primary text--delete ">Delete</p>
         </div>
-        <div class="comment--reply">
+        <div class="comment--reply" data-id="${this.id}">
           <img src="../../images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
@@ -49,6 +58,32 @@ export class Template {
           ${this.content}
         </p>
       </div>
+
+      <div class="counterFeatureContainerResponsive">
+
+            <!-- Counter Responsive -->
+            <div class="counterWrapper counterResponsive">
+            <button data-id="${this.id}" class="counterButton counter--increment">
+             <h2 class="incrementText">+</h2>
+            </button>
+            <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
+            <button data-id="${this.id}" class="counterButton counter--decrement">
+              <h2 class="incrementText">-</h2>
+            </button>
+          </div>
+
+          <!-- Comment Feature Responsive -->
+          <div class="comment--features">
+        <div class="comment--delete" data-id="${this.id} delete--responsive">
+          <img src="../../images/icon-delete.svg" alt="" />
+          <p class="text--primary text--delete">Delete</p>
+        </div>
+        <div class="comment--reply comment--edit" data-id="${this.id}">
+          <img src="../../images/icon-edit.svg" alt="" />
+          <p class="text--primary">Edit</p>
+        </div>
+      </div>
+        </div>
     </div>
   </div>`;
   }
@@ -58,11 +93,11 @@ export class Template {
     <div class="commentContent">
       <!-- Counter -->
       <div class="counterWrapper">
-        <button class="counterButton counter--increment">
+        <button data-id="${this.id}" class="counterButton counter--increment">
           <h2 class="incrementText">+</h2>
         </button>
         <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
-        <button class="counterButton counter--decrement">
+        <button data-id="${this.id}" class="counterButton counter--decrement">
           <h2 class="incrementText">-</h2>
         </button>
       </div>
@@ -78,7 +113,7 @@ export class Template {
             <p class="text--secondary">${this.username}</p>
             <p class="text--neutral">${this.createdAt}</p>
           </div>
-          <div class="comment--reply">
+          <div class="comment--reply" data-id="${this.id}">
             <img src="../../images/icon-reply.svg" alt="" />
             <p class="text--primary">Reply</p>
           </div>
@@ -87,6 +122,26 @@ export class Template {
           ${this.content}
         </p>
       </div>
+
+      <div class="counterFeatureContainerResponsive">
+
+            <!-- Counter Responsive -->
+            <div class="counterWrapper counterResponsive">
+            <button data-id="${this.id}" class="counterButton counter--increment">
+             <h2 class="incrementText">+</h2>
+            </button>
+            <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
+            <button data-id="${this.id}" class="counterButton counter--decrement">
+              <h2 class="incrementText">-</h2>
+            </button>
+          </div>
+
+          <!-- Comment Feature Responsive -->
+          <div class="comment--reply replyResponsive" data-id="${this.id}">
+            <img src="../../images/icon-reply.svg" alt="" />
+            <p class="text--primary">Reply</p>
+          </div>
+        </div>
     </div>
   </div>`;
   }
@@ -98,11 +153,11 @@ export class Template {
     <div class="commentContent">
       <!-- Counter -->
       <div class="counterWrapper">
-        <button class="counterButton counter--increment">
+        <button data-id="${this.id}" class="counterButton counter--increment">
           <h2 class="incrementText">+</h2>
         </button>
         <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
-        <button class="counterButton counter--decrement">
+        <button data-id="${this.id}" class="counterButton counter--decrement">
           <h2 class="incrementText">-</h2>
         </button>
       </div>
@@ -120,20 +175,39 @@ export class Template {
             <p class="text--neutral">${this.createdAt}</p>
           </div>
           <div class="comment--features">
-        <div class="comment--delete">
+        <div class="comment--delete" data-id="${this.id}">
           <img src="../../images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete">Delete</p>
         </div>
-        <div class="comment--reply">
+        <div class="comment--reply " data-id="${this.id}">
           <img src="../../images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
       </div>
         </div>
         <p class="text--neutral">
-          ${this.username} ${this.content}
+          <span class="text--primary">@${this.replyingTo}</span> ${this.content}
         </p>
       </div>
+      <div class="counterFeatureContainerResponsive">
+
+            <!-- Counter Responsive -->
+            <div class="counterWrapper counterResponsive">
+            <button data-id="${this.id}" class="counterButton counter--increment">
+             <h2 class="incrementText">+</h2>
+            </button>
+            <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
+            <button data-id="${this.id}" class="counterButton counter--decrement">
+              <h2 class="incrementText">-</h2>
+            </button>
+          </div>
+
+          <!-- Comment Feature Responsive -->
+          <div class="comment--reply replyResponsive" data-id="${this.id}">
+            <img src="../../images/icon-reply.svg" alt="" />
+            <p class="text--primary">Reply</p>
+          </div>
+        </div>
     </div>
   </div>
   </div>`;
@@ -146,11 +220,11 @@ export class Template {
       <div class="commentContent">
         <!-- Counter -->
         <div class="counterWrapper">
-          <button class="counterButton counter--increment">
+          <button data-id="${this.id}" class="counterButton counter--increment">
             <h2 class="incrementText">+</h2>
           </button>
           <p class="counter--score text--primary" data-votes="12">${this.score}</p>
-          <button class="counterButton counter--decrement">
+          <button data-id="${this.id}" class="counterButton counter--decrement">
             <h2 class="incrementText">-</h2>
           </button>
         </div>
@@ -166,36 +240,53 @@ export class Template {
               <p class="text--secondary">${this.username}</p>
               <p class="text--neutral">${this.createdAt}</p>
             </div>
-            <div class="comment--reply">
+            <div class="comment--reply" data-id="${this.id}">
               <img src="../../images/icon-reply.svg" alt="" />
               <p class="text--primary">Reply</p>
             </div>
           </div>
           <p class="text--neutral">
-            ${this.username} ${this.content}
+           <span class="text--primary">@${this.replyingTo}</span> ${this.content}
           </p>
+        </div>
+        <div class="counterFeatureContainerResponsive">
+
+            <!-- Counter Responsive -->
+            <div class="counterWrapper counterResponsive">
+            <button data-id="${this.id}" class="counterButton counter--increment">
+             <h2 class="incrementText">+</h2>
+            </button>
+            <p class="counter--score text--primary" data-votes="${this.score}">${this.score}</p>
+            <button data-id="${this.id}" class="counterButton counter--decrement">
+              <h2 class="incrementText">-</h2>
+            </button>
+          </div>
+
+          <!-- Comment Feature Responsive -->
+          <div class="comment--reply replyResponsive">
+            <img src="../../images/icon-reply.svg" alt="" />
+            <p class="text--primary">Reply</p>
+          </div>
         </div>
       </div>
     </div>
     </div>`;
   }
-
-  replyInputContainer() {
-    return `<div class="replyContainer">
-      <div class="replyBreak"></div>
-    <div class="addCommentWrapper replyingTo">
-        <img
-          class="userIcon"
-          src="../../images/avatars/image-juliusomo.png"
-          alt=""
-        />
-        <input
-          class="comment--input reply"
-          type="text"
-          placeholder="Add a comment..."
-        />
-        <button class="button-primary reply--button">Reply</button>
-      </div>
-      </div>`;
-  }
 }
+
+export const replyInputContainer = `<div class="replyContainer replyInputContainer">
+    <div class="replyBreak"></div>
+  <div class="addCommentWrapper replyingTo">
+      <img
+        class="userIcon"
+        src="../../images/avatars/image-juliusomo.png"
+        alt=""
+      />
+      <input
+        class="comment--input reply"
+        type="text"
+        placeholder="Add a comment..."
+      />
+      <button class="button-primary reply--button">Reply</button>
+    </div>
+    </div>`;

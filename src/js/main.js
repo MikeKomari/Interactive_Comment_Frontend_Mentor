@@ -1,87 +1,16 @@
-import { commentTemplate, commentUserTemplate } from "../js/Templates.js";
-import { mergeSort, merge } from "../js/MergeSort.js";
 import { Template } from "../js/Template2.js";
 import { timePassed } from "../js/TimeHandler.js";
+import { deleteComment } from "../js/DeleteComment.js";
+import { replyComment } from "../js/ReplyComment.js";
+import { addVoteEventListeners } from "../js/VoteHandler.js";
+import { user, comments } from "./user.js";
+import { editComment } from "../js/EditComment.js";
+import { inputCommentContainer } from "./inputCommentContainer.js";
 
-const user = [
-  {
-    image: {
-      png: "../../images/avatars/image-juliusomo.png",
-      webp: "./images/avatars/image-juliusomo.webp",
-    },
-    username: "juliusomo",
-  },
-  {},
-];
-
-const comments = [
-  {
-    id: 1,
-    content:
-      "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-    createdAt: "1 month ago",
-    score: 12,
-    user: {
-      image: {
-        png: "../../images/avatars/image-amyrobson.png",
-        webp: "../../images/avatars/image-amyrobson.webp",
-      },
-      username: "amyrobson",
-    },
-    replies: [],
-  },
-  {
-    id: 2,
-    content:
-      "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
-    createdAt: "2 weeks ago",
-    score: 5,
-    user: {
-      image: {
-        png: "../../images/avatars/image-maxblagun.png",
-        webp: "../../images/avatars/image-maxblagun.webp",
-      },
-      username: "maxblagun",
-    },
-    replies: [
-      {
-        id: 3,
-        content:
-          "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
-        createdAt: "1 week ago",
-        score: 4,
-        replyingTo: "maxblagun",
-        user: {
-          image: {
-            png: "../../images/avatars/image-ramsesmiron.png",
-            webp: "../../images/avatars/image-ramsesmiron.webp",
-          },
-          username: "ramsesmiron",
-        },
-      },
-      {
-        id: 4,
-        content:
-          "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-        createdAt: "2 days ago",
-        score: 2,
-        replyingTo: "ramsesmiron",
-        user: {
-          image: {
-            png: "../../images/avatars/image-juliusomo.png",
-            webp: "../../images/avatars/image-juliusomo.webp",
-          },
-          username: "juliusomo",
-        },
-      },
-    ],
-  },
-];
-
-let currentUser = user[0];
+export let currentUser = user[0];
 
 //return highest id + 1
-function findCurrentId(comments) {
+export function findCurrentId(comments) {
   const replysID = comments
     .flatMap((comments) => comments.replies)
     .map((reply) => reply.id);
@@ -92,15 +21,12 @@ function findCurrentId(comments) {
   return currentID + 1;
 }
 
-const voteIncrement = document.querySelectorAll(".counter--increment");
-const voteDecrement = document.querySelectorAll(".counter--decrement");
-
 //Printing Comments
 const printComments = (details, containerClass) => {
   const props = {
     id: details.id,
     content: details.content,
-    createdAt: details.createdAt,
+    createdAt: timePassed(details.createdAt),
     score: details.score,
     image: details.user.image.png,
     username: details.user.username,
@@ -120,10 +46,11 @@ const printReplies = (details, containerClass) => {
   const props = {
     id: details.id,
     content: details.content,
-    createdAt: details.createdAt,
+    createdAt: timePassed(details.createdAt),
     score: details.score,
     image: details.user.image.png,
     username: details.user.username,
+    replyingTo: details.replyingTo,
   };
 
   const isUser = props.username === currentUser.username;
@@ -136,7 +63,7 @@ const printReplies = (details, containerClass) => {
 };
 
 //Update UI
-const updateUI = function (comments) {
+export const updateUI = function (comments) {
   const containerClass = document.querySelector(".addCommentWrapper");
 
   const commentWrapper = document.querySelectorAll(".commentContainer");
@@ -154,16 +81,16 @@ const updateUI = function (comments) {
       printComments(comments, containerClass);
 
       if (!replies) return;
-      replies.forEach((reply) => printReplies(reply, containerClass));
+      replies
+        .toSorted((a, b) => b.score - a.score)
+        .forEach((reply) => printReplies(reply, containerClass));
     });
 };
 
-// updateUI(comments);
+updateUI(comments);
 
 //Commenting
 const inputCommentButton = document.querySelector(".comment--button");
-const inputCommentContainer = document.querySelector(".comment--input");
-
 inputCommentButton.addEventListener("click", (e) => {
   const commentSubmittedTime = new Date();
   console.log(commentSubmittedTime);
@@ -174,8 +101,8 @@ inputCommentButton.addEventListener("click", (e) => {
   const inputObject = {
     id: findCurrentId(comments),
     content: commentContent,
-    createdAt: timePassed(commentSubmittedTime),
-    score: 1000,
+    createdAt: commentSubmittedTime,
+    score: 0,
     user: {
       image: { png: `${currentUser.image.png}` },
       username: `${currentUser.username}`,
@@ -186,7 +113,20 @@ inputCommentButton.addEventListener("click", (e) => {
   comments.push(inputObject);
   console.log(inputObject);
 
-  // updateUI(comments);
+  updateUI(comments);
+  // deleteComment();
+  // replyComment();
+  // addVoteEventListeners();
 });
 
-console.log(currentUser.image.png);
+export function findCommentById(comments, id) {
+  let comment = comments.find((comment) => comment.id === id);
+  if (comment) return comment;
+
+  for (let comment of comments) {
+    let reply = comment.replies.find((reply) => reply.id === id);
+    if (reply) return reply;
+  }
+
+  return null;
+}
