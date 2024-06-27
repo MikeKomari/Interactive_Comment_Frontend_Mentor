@@ -8,6 +8,8 @@ import { initVote } from "./VoteHandler.js";
 
 export let currentUser = user[0];
 
+// Arch user pattern
+
 //return highest id + 1
 export function findCurrentId(comments) {
   const replysID = comments
