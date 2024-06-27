@@ -1,15 +1,14 @@
-import { commentTemplate, commentUserTemplate } from "./TemplatesFail.js";
-import { mergeSort, merge } from "../js/MergeSort.js";
 import { Template } from "../js/Template2.js";
 import { timePassed } from "../js/TimeHandler.js";
-import { deleteComment } from "../js/DeleteComment.js";
-import { replyComment } from "../js/ReplyComment.js";
-import { addVoteEventListeners } from "../js/VoteHandler.js";
 import { user, comments } from "./user.js";
-import { editComment } from "../js/EditComment.js";
 import { inputCommentContainer } from "./inputCommentContainer.js";
+import { initDelete } from "./DeleteComment.js";
+import { initReply } from "./ReplyComment.js";
+import { initVote } from "./VoteHandler.js";
 
 export let currentUser = user[0];
+
+// Arch user pattern
 
 //return highest id + 1
 export function findCurrentId(comments) {
@@ -91,8 +90,6 @@ export const updateUI = function (comments) {
 
 //Commenting
 const inputCommentButton = document.querySelector(".comment--button");
-export const inputCommentContainer = document.querySelector(".comment--input");
-
 inputCommentButton.addEventListener("click", (e) => {
   const commentSubmittedTime = new Date();
   const commentContent = inputCommentContainer.value;
@@ -111,9 +108,9 @@ inputCommentButton.addEventListener("click", (e) => {
 
   comments.push(inputObject);
   updateUI(comments);
-  // deleteComment();
-  // replyComment();
-  // addVoteEventListeners();
+  initDelete();
+  initReply();
+  initVote();
 });
 
 export function findCommentById(comments, id) {

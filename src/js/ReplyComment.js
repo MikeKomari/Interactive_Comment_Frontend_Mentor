@@ -8,14 +8,13 @@ import {
 } from "../js/main.js";
 import { Template, replyInputContainer } from "../js/Template2.js";
 import {
-  deleteComment,
+  initDelete,
   findCommentIndex,
   findReplyIndex,
 } from "../js/DeleteComment.js";
-import { addVoteEventListeners } from "../js/VoteHandler.js";
-import { editComment } from "../js/EditComment.js";
+import { initVote } from "../js/VoteHandler.js";
 
-export function replyComment() {
+export function initReply() {
   const replyButton = document.querySelectorAll(".comment--reply");
   const body = document.querySelector("body");
 
@@ -75,9 +74,9 @@ export function replyComment() {
 
             tempAccount.replies.push(props);
             updateUI(comments);
-            deleteComment();
-            replyComment();
-            addVoteEventListeners();
+            initDelete();
+            initReply();
+            initVote();
             return;
           }
 
@@ -96,8 +95,8 @@ export function replyComment() {
           };
           tempAccount.replies.push(props);
           updateUI(comments);
-          replyComment();
           deleteComment();
+          replyComment();
           addVoteEventListeners();
         });
       });
@@ -122,4 +121,4 @@ export function replyComment() {
   });
 }
 
-replyComment();
+initReply();
