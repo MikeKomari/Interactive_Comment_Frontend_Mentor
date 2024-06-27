@@ -1,7 +1,7 @@
 import { updateUI, findCommentById } from "../js/main.js";
 import { comments } from "./user.js";
 
-export function addVoteEventListeners() {
+export function initVote() {
   const voteIncrement = document.querySelectorAll(".counter--increment");
   const voteDecrement = document.querySelectorAll(".counter--decrement");
 
@@ -13,7 +13,7 @@ export function addVoteEventListeners() {
       if (accountTemp) {
         accountTemp.score++;
         updateUI(comments); // Update the UI after incrementing the score
-        addVoteEventListeners(); // Re-attach event listeners after updating the UI
+        initVote(); // Re-attach event listeners after updating the UI
       } else {
         console.log("not found");
       }
@@ -32,7 +32,7 @@ export function addVoteEventListeners() {
           accountTemp.score = 0;
         }
         updateUI(comments); // Update the UI after decrementing the score
-        addVoteEventListeners(); // Re-attach event listeners after updating the UI
+        initVote(); // Re-attach event listeners after updating the UI
       } else {
         console.log("not found");
       }
@@ -40,4 +40,4 @@ export function addVoteEventListeners() {
   });
 }
 
-addVoteEventListeners();
+initVote();
