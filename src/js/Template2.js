@@ -296,7 +296,7 @@ export const replyInputContainer = `<div class="replyContainer replyInputContain
   <div class="addCommentWrapper replyingTo">
       <img
         class="userIcon"
-        src="image-juliusomo.png"
+        src="image/avatars/image-juliusomo.png"
         alt=""
       />
       <input
