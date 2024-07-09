@@ -45,11 +45,11 @@ export class Template {
           </div>
           <div class="comment--features">
         <div class="comment--delete" data-id="${this.id}">
-          <img src="../../images/icon-delete.svg" alt="" />
+          <img src="images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete ">Delete</p>
         </div>
         <div class="comment--edit" data-id="${this.id}">
-          <img src="../../images/icon-edit.svg" alt="" />
+          <img src="images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
       </div>
@@ -83,11 +83,11 @@ export class Template {
           <!-- Comment Feature Responsive -->
           <div class="comment--features">
         <div class="comment--delete" data-id="${this.id} delete--responsive">
-          <img src="../../images/icon-delete.svg" alt="" />
+          <img src="images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete">Delete</p>
         </div>
         <div class="comment--edit" data-id="${this.id}">
-          <img src="../../images/icon-edit.svg" alt="" />
+          <img src="images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
       </div>
@@ -122,7 +122,7 @@ export class Template {
             <p class="text--neutral">${this.createdAt}</p>
           </div>
           <div class="comment--reply" data-id="${this.id}">
-            <img src="../../images/icon-reply.svg" alt="" />
+            <img src="images/icon-reply.svg" alt="" />
             <p class="text--primary">Reply</p>
           </div>
         </div>
@@ -146,7 +146,7 @@ export class Template {
 
           <!-- Comment Feature Responsive -->
           <div class="comment--reply replyResponsive" data-id="${this.id}">
-            <img src="../../images/icon-reply.svg" alt="" />
+            <img src="images/icon-reply.svg" alt="" />
             <p class="text--primary">Reply</p>
           </div>
         </div>
@@ -184,11 +184,11 @@ export class Template {
           </div>
           <div class="comment--features">
         <div class="comment--delete" data-id="${this.id}">
-          <img src="../../images/icon-delete.svg" alt="" />
+          <img src="images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete">Delete</p>
         </div>
         <div class=" comment--edit" data-id="${this.id}">
-          <img src="../../images/icon-edit.svg" alt="" />
+          <img src="images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
       </div>
@@ -220,7 +220,7 @@ export class Template {
 
           <!-- Comment Feature Responsive -->
           <div class="comment--reply replyResponsive" data-id="${this.id}">
-            <img src="../../images/icon-reply.svg" alt="" />
+            <img src="images/icon-reply.svg" alt="" />
             <p class="text--primary">Reply</p>
           </div>
         </div>
@@ -250,14 +250,14 @@ export class Template {
             <div class="content--user">
               <img
                 class="userIcon"
-                src="../../images/avatars/${this.image}"
+                src="${this.image}"
                 alt=""
               />
               <p class="text--secondary">${this.username}</p>
               <p class="text--neutral">${this.createdAt}</p>
             </div>
             <div class="comment--reply" data-id="${this.id}">
-              <img src="../../images/icon-reply.svg" alt="" />
+              <img src="images/icon-reply.svg" alt="" />
               <p class="text--primary">Reply</p>
             </div>
           </div>
@@ -281,7 +281,7 @@ export class Template {
 
           <!-- Comment Feature Responsive -->
           <div class="comment--reply replyResponsive">
-            <img src="../../images/icon-reply.svg" alt="" />
+            <img src="images/icon-reply.svg" alt="" />
             <p class="text--primary">Reply</p>
           </div>
         </div>
@@ -296,7 +296,7 @@ export const replyInputContainer = `<div class="replyContainer replyInputContain
   <div class="addCommentWrapper replyingTo">
       <img
         class="userIcon"
-        src="../../images/avatars/image-juliusomo.png"
+        src="image-juliusomo.png"
         alt=""
       />
       <input
