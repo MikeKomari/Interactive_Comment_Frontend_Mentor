@@ -48,15 +48,23 @@ export class Template {
           <img src="../../images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete ">Delete</p>
         </div>
-        <div class="comment--reply" data-id="${this.id}">
+        <div class="comment--edit" data-id="${this.id}">
           <img src="../../images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
       </div>
         </div>
-        <p class="text--neutral">
+        <p class="text--neutral comment--content">
           ${this.content}
         </p>
+        <div class="inputUpdateContent hidden">
+  <input
+        class="comment--input edit"
+        type="text"
+        placeholder="Add a comment..."
+      />
+      <button class="button-primary update--button">Update</button>
+</div>
       </div>
 
       <div class="counterFeatureContainerResponsive">
@@ -78,7 +86,7 @@ export class Template {
           <img src="../../images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete">Delete</p>
         </div>
-        <div class="comment--reply comment--edit" data-id="${this.id}">
+        <div class="comment--edit" data-id="${this.id}">
           <img src="../../images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
@@ -179,15 +187,23 @@ export class Template {
           <img src="../../images/icon-delete.svg" alt="" />
           <p class="text--primary text--delete">Delete</p>
         </div>
-        <div class="comment--reply " data-id="${this.id}">
+        <div class=" comment--edit" data-id="${this.id}">
           <img src="../../images/icon-edit.svg" alt="" />
           <p class="text--primary">Edit</p>
         </div>
       </div>
         </div>
-        <p class="text--neutral">
+        <p class="text--neutral comment--content">
           <span class="text--primary">@${this.replyingTo}</span> ${this.content}
         </p>
+        <div class="inputUpdateContent hidden">
+  <input
+        class="comment--input edit"
+        type="text"
+        placeholder="Add a comment..."
+      />
+      <button class="button-primary update--button">Update</button>
+</div>
       </div>
       <div class="counterFeatureContainerResponsive">
 
@@ -248,6 +264,7 @@ export class Template {
           <p class="text--neutral">
            <span class="text--primary">@${this.replyingTo}</span> ${this.content}
           </p>
+          
         </div>
         <div class="counterFeatureContainerResponsive">
 

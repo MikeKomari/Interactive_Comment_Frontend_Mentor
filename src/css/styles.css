@@ -176,7 +176,8 @@ textarea {
 }
 
 .comment--reply,
-.comment--delete {
+.comment--delete,
+.comment--edit {
   display: flex;
   align-items: center;
   gap: 5px;

@@ -1,8 +1,9 @@
 import { findCommentById, updateUI } from "../js/main.js";
 import { inputCommentContainer } from "./inputCommentContainer.js";
-import { comments } from "./user.js";
+import { comments, user } from "./user.js";
 import { initReply } from "../js/ReplyComment.js";
 import { initVote } from "./VoteHandler.js";
+import { initEdit } from "./EditComment.js";
 
 const deleteModal = document.querySelector(".deleteModal");
 
@@ -36,7 +37,6 @@ export function initDelete() {
   inputCommentContainer.blur();
 
   //Main Function
-  console.log(deleteButton);
   deleteButton.forEach((click) => {
     click.addEventListener("click", (e) => {
       e.preventDefault();
@@ -58,19 +58,22 @@ export function initDelete() {
         replyTemp = findReplyIndex(comments, currentTargetId);
       }
 
-      console.log(commentTemp, replyTemp);
       //Confirm Button
       confirmButton.forEach((click) => {
         click.addEventListener("click", function (e) {
-          console.log(comments);
-          console.log(commentTemp, replyTemp);
           if (commentTemp !== -1) {
             comments.splice(commentTemp, 1);
+            updateUI(comments);
+            initEdit();
+            initDelete();
+            initReply();
+            initVote();
             return;
           }
           comments[replyTemp[0]].replies.splice(replyTemp[1], 1);
           deleteModal.classList.add("hidden");
           updateUI(comments);
+          initEdit();
           initDelete();
           initReply();
           initVote();

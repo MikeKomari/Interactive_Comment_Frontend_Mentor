@@ -37,4 +37,3 @@ export function merge(arr, startIndex, endIndex, middle) {
 }
 
 // mergeSort(comments);
-// comments.map((com) => console.log(com.score));

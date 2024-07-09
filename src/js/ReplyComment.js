@@ -1,11 +1,10 @@
 import {
-  comments,
   updateUI,
   findCommentById,
   findCurrentId,
-  user,
   currentUser,
 } from "../js/main.js";
+import { comments } from "./user.js";
 import { Template, replyInputContainer } from "../js/Template2.js";
 import {
   initDelete,
@@ -13,6 +12,7 @@ import {
   findReplyIndex,
 } from "../js/DeleteComment.js";
 import { initVote } from "../js/VoteHandler.js";
+import { initEdit } from "./EditComment.js";
 
 export function initReply() {
   const replyButton = document.querySelectorAll(".comment--reply");
@@ -32,7 +32,6 @@ export function initReply() {
         commentContainer = event.target.closest(".replyContainer");
         replyTemp = findReplyIndex(comments, currentTargetId);
       }
-      console.log(commentTemp, replyTemp);
       commentContainer.insertAdjacentHTML("afterend", replyInputContainer);
 
       //Add the reply
@@ -74,6 +73,7 @@ export function initReply() {
 
             tempAccount.replies.push(props);
             updateUI(comments);
+            initEdit();
             initDelete();
             initReply();
             initVote();
@@ -95,12 +95,13 @@ export function initReply() {
           };
           tempAccount.replies.push(props);
           updateUI(comments);
-          deleteComment();
-          replyComment();
-          addVoteEventListeners();
+          initEdit();
+          initDelete();
+          initReply();
+          initVote();
         });
       });
-      
+
       //If a click is executed other than the content, it collapses
       body.addEventListener(
         "click",

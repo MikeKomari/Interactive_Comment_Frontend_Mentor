@@ -1,12 +1,10 @@
-import { commentTemplate, commentUserTemplate } from "./TemplatesFail.js";
-import { mergeSort, merge } from "../js/MergeSort.js";
 import { Template } from "../js/Template2.js";
 import { timePassed } from "../js/TimeHandler.js";
-import { deleteComment } from "../js/DeleteComment.js";
-import { replyComment } from "../js/ReplyComment.js";
-import { addVoteEventListeners } from "../js/VoteHandler.js";
+import { initDelete } from "../js/DeleteComment.js";
+import { initReply } from "../js/ReplyComment.js";
+import { initVote } from "../js/VoteHandler.js";
+import { initEdit } from "../js/EditComment.js";
 import { user, comments } from "./user.js";
-import { editComment } from "../js/EditComment.js";
 import { inputCommentContainer } from "./inputCommentContainer.js";
 
 export let currentUser = user[0];
@@ -91,12 +89,13 @@ export const updateUI = function (comments) {
 
 //Commenting
 const inputCommentButton = document.querySelector(".comment--button");
-export const inputCommentContainer = document.querySelector(".comment--input");
 
 inputCommentButton.addEventListener("click", (e) => {
   const commentSubmittedTime = new Date();
   const commentContent = inputCommentContainer.value;
 
+  //No input
+  if (commentContent.value === "") return;
   const inputObject = {
     id: findCurrentId(comments),
     content: commentContent,
@@ -111,9 +110,10 @@ inputCommentButton.addEventListener("click", (e) => {
 
   comments.push(inputObject);
   updateUI(comments);
-  // deleteComment();
-  // replyComment();
-  // addVoteEventListeners();
+  initEdit();
+  initDelete();
+  initReply();
+  initVote();
 });
 
 export function findCommentById(comments, id) {
@@ -130,6 +130,7 @@ export function findCommentById(comments, id) {
 
 // ==== INITIALIZATION ====
 updateUI(comments);
+initEdit();
 initDelete();
 initReply();
 initVote();
